@@ -99,8 +99,8 @@ vocab = infos['vocab'] # ix -> word mapping
 
 # Setup the model
 model = models.setup(opt)
-model.load_state_dict(torch.load(opt.model))
-model.cuda()
+model.load_state_dict(torch.load(opt.model, map_location=lambda storage, loc: storage))
+#model.cuda()
 model.eval()
 crit = utils.LanguageModelCriterion()
 
