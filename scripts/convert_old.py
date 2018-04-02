@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import argparse
 import h5py
 import os
@@ -32,7 +34,7 @@ def main(params):
                 data=np.load(npy_att_path)['feat'])
 
             if i % 1000 == 0:
-                print('processing %d/%d (%.2f%% done)' % (i, N, i * 100.0 / N))
+                print(('processing %d/%d (%.2f%% done)' % (i, N, i * 100.0 / N)))
         file_fc.close()
         file_att.close()
 
@@ -50,6 +52,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     params = vars(args)  # convert to ordinary dict
     print('parsed input parameters:')
-    print(json.dumps(params, indent=2))
+    print((json.dumps(params, indent=2)))
 
     main(params)

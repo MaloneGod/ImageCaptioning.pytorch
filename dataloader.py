@@ -173,7 +173,7 @@ class DataLoader(data.Dataset):
             infos.append(info_dict)
 
         # generate mask
-        nonzeros = np.array(list(map(lambda x: (x != 0).sum() + 2, label_batch)))
+        nonzeros = np.array(list([(x != 0).sum() + 2 for x in label_batch]))
         for ix, row in enumerate(mask_batch):
             row[:nonzeros[ix]] = 1
 
@@ -257,7 +257,7 @@ class BlobFetcher():
             self.reset()
 
         ix, wrapped = self._get_next_minibatch_inds()
-        tmp = self.split_loader.next()
+        tmp = next(self.split_loader)
         if wrapped:
             self.reset()
         assert tmp[2] == ix, "ix not equal"
